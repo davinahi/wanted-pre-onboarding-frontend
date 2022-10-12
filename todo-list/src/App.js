@@ -10,7 +10,7 @@ function App() {
       <Header />
 
       <Template className="container">
-        <h1>Todo List</h1>
+        <H1>Todo List</H1>
         <InputForm />
         <List />
       </Template>
@@ -18,6 +18,18 @@ function App() {
   );
 }
 
-const Template = styled.div``;
+const Template = styled.div`
+  width: 450px;
+  background: #efefef;
+  margin: 30px auto 0;
+  height: 500px;
+  padding: 30px 25px 0 25px;
+  border-radius: 3px;
+  box-shadow: 3px 3px 3px 3px #cfcfcf;
+`;
+const H1 = styled.h1`
+  color: #7e54f5;
+  text-align: center;
+`;
 
 export default App;
