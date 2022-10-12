@@ -1,5 +1,3 @@
-# wanted-pre-onboarding-frontend
-
 # styled-component
 
 - styled-component를 사용한 이유는 각 컴포넌트마다 같은 파일 안에 style을 지정할 수 있기 때문에 가독성 측면에서 가장 적합하다는 판단이 들었기 때문에 선택하게 되었다.
