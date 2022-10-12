@@ -4,46 +4,45 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 
 // <i class="bi bi-pencil-square"></i> 수정 아이콘
 
-const Item = () => {
+const Item = ({ todo }) => {
   return (
-    <>
-      <Li>
-        <Checkbox>
+    <Li>
+      <Checkbox>
+        {todo.checked ? (
           <i className="bi bi-check-square"></i>
-          {/* <i className="bi bi-square"></i> */}
-        </Checkbox>
-        <Label forhtml="todoItem">
-          Have some ice cream and jelly with Zeze
-        </Label>
-        {/* <input type="text" id="todoItem" /> */}
-      </Li>
-      <Li background-color="gray">
-        <Checkbox>
-          {/* <i className="bi bi-check-square"></i> */}
+        ) : (
           <i className="bi bi-square"></i>
-        </Checkbox>
-        <Label forhtml="todoItem">Travel in Europe with Zeze</Label>
-        {/* <input type="text" id="todoItem" /> */}
-      </Li>
-    </>
+        )}
+        <Label forhtml="todoItem">{todo.content}</Label>
+      </Checkbox>
+      {/* <input type="text" id="todoItem" /> */}
+      <div className="edit-btns">
+        <i className="bi bi-pencil-square"></i>
+        <i className="bi bi-trash3"></i>
+      </div>
+    </Li>
   );
 };
 
-const Checkbox = styled.span`
-  width: 30px;
-  border: 1px solid #dadada;
-`;
-
 const Li = styled.li`
   display: flex;
-  width: 100%;
+  justify-content: space-between;
   background-color: #e0d6f1;
   padding: 10px;
-  /* border: 1px solid #dadada; */
   border-radius: 3px;
   align-items: center;
-  /* box-shadow: 3px 3px 3px 3px #e3e1e1; */
   margin-bottom: 5px;
+  .edit-btns {
+    margin-right: 3px;
+    .bi-pencil-square {
+      margin-right: 5px;
+    }
+  }
+`;
+
+const Checkbox = styled.span`
+  /* width: 30px; */
+  border: 1px solid #dadada;
 `;
 
 const Label = styled.label`

@@ -1,11 +1,23 @@
-import React from "react";
+import { useState } from "react";
 import Button from "../UI/Button";
 import styled from "styled-components";
 
-const InputForm = () => {
+const InputForm = ({ submitInputHandler }) => {
+  const [value, setValue] = useState("");
+
+  const inputChangeHandler = (e) => {
+    setValue(e.target.value);
+    console.log(value);
+  };
+
   return (
-    <Form>
-      <Input type="text" placeholder="I have to do something..." />
+    <Form onSubmit={submitInputHandler}>
+      <Input
+        type="text"
+        placeholder="I have to do something..."
+        value={value}
+        onChange={inputChangeHandler}
+      />
       <Button />
     </Form>
   );

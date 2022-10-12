@@ -22,6 +22,9 @@ const Btn = styled.button`
   height: ${(props) => props.height || "100%"};
   color: #fff;
   font-weight: 400;
+  &:hover {
+    background-color: #865ff1;
+  }
 `;
 
 export default Button;
