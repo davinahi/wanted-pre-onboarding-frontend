@@ -15,7 +15,9 @@ const Header = () => {
 const HeaderBar = styled.header`
   position: relative;
   background: #efefef;
-  height: 70px;
+  height: 60px;
+  padding-left: 90%;
+  padding-top: 20px;
 `;
 
 export default Header;

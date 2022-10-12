@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 const List = () => {
   return (
-    <Ul className="todoList">
+    <Ul>
       <Item />
     </Ul>
   );

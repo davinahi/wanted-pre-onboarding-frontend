@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 //<i class="bi bi-plus-square"></i>; + 버튼
+// <i class="bi bi-x-square"></i>;  취소 버튼
 
 const Button = (props) => {
   return (
