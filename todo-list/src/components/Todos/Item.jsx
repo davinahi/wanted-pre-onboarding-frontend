@@ -1,24 +1,59 @@
-import React from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import "bootstrap-icons/font/bootstrap-icons.css";
 
 // <i class="bi bi-pencil-square"></i> 수정 아이콘
 
-const Item = ({ todo }) => {
+const Item = ({ todo, onToggle, onRemove }) => {
+  const [edited, setEdited] = useState(false);
+
+  //함수명 변경(라벨에서도 쓰이고 있음)
+  const checkBoxClickHandler = () => {
+    onToggle(todo.id);
+    console.log("checkbox 움직인다!");
+  };
+
+  const removeHandler = () => {
+    onRemove(todo.id);
+  };
+
+  const editContentHandler = () => {
+    setEdited(!edited);
+  };
+
   return (
     <Li>
-      <Checkbox>
+      <Checkbox onClick={checkBoxClickHandler}>
         {todo.checked ? (
-          <i className="bi bi-check-square"></i>
+          <span className="edit-btn" role="button">
+            <i className="bi bi-check-square"></i>
+          </span>
         ) : (
-          <i className="bi bi-square"></i>
+          <span className="edit-btn" role="button">
+            <i className="bi bi-square"></i>
+          </span>
         )}
-        <Label forhtml="todoItem">{todo.content}</Label>
+        {edited ? (
+          <input onChange={checkBoxClickHandler} value={todo.content}></input>
+        ) : (
+          <Label forhtml="todoItem">{todo.content}</Label>
+        )}
       </Checkbox>
+
       {/* <input type="text" id="todoItem" /> */}
+
       <div className="edit-btns">
-        <i className="bi bi-pencil-square"></i>
-        <i className="bi bi-trash3"></i>
+        <span
+          className="edit-btn"
+          role="button"
+          onClick={editContentHandler}
+          value={todo.content}
+        >
+          <i className="bi bi-pencil-square"></i>
+        </span>
+        <span className="remove-btn" role="button" onClick={removeHandler}>
+          <i className="bi bi-trash3"></i>
+        </span>
       </div>
     </Li>
   );
@@ -42,7 +77,6 @@ const Li = styled.li`
 
 const Checkbox = styled.span`
   border: 1px solid #dadada;
-  text-overflow: ellipsis;
 `;
 
 const Label = styled.label`

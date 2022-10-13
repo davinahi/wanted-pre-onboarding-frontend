@@ -4,17 +4,13 @@ import styled from "styled-components";
 
 const InputForm = ({ onInsert }) => {
   const [value, setValue] = useState("");
-  // const contentLen = value === /[ㄱ-ㅎㅏ-ㅣ가-힣]/g ? "20" : "40";
 
+  //자간에 따른 한글 영문 글자수 제한 길이 설정
   const checkKor = (str) => {
     const regExp = /[ㄱ-ㅎㅏ-ㅣ가-힣]/g;
-    if (regExp.test(str)) {
-      return true;
-    } else {
-      return false;
-    }
+    if (regExp.test(str)) return true;
+    else return false;
   };
-
   const contentLen = checkKor(value) ? "20" : "35";
 
   const inputChangeHandler = (e) => {

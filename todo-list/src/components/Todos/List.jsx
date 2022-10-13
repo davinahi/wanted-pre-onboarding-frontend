@@ -1,12 +1,16 @@
-import React from "react";
 import Item from "./Item";
 import styled from "styled-components";
 
-const List = ({ todos }) => {
+const List = ({ todos, onToggle, onRemove }) => {
   return (
     <Ul>
       {todos.map((todo) => (
-        <Item todo={todo} key={todo.id} />
+        <Item
+          todo={todo}
+          key={todo.id}
+          onToggle={onToggle}
+          onRemove={onRemove}
+        />
       ))}
     </Ul>
   );

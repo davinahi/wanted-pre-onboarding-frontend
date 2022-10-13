@@ -23,7 +23,18 @@ function App() {
     setTodos([newTodo, ...todos]);
     newId.current += 1;
   };
-  console.log(todos);
+
+  const checkBoxHandler = (id) => {
+    setTodos(
+      todos.map((todo) =>
+        todo.id === id ? { ...todo, checked: !todo.checked } : todo
+      )
+    );
+  };
+
+  const removeItem = (id) => {
+    setTodos(todos.filter((todo) => todo.id !== id));
+  };
 
   return (
     <div className="App">
@@ -31,7 +42,7 @@ function App() {
       <Template className="container">
         <H1>Todo List</H1>
         <InputForm onInsert={insertNewTodo} />
-        <List todos={todos} />
+        <List todos={todos} onToggle={checkBoxHandler} onRemove={removeItem} />
       </Template>
     </div>
   );
