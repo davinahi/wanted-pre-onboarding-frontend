@@ -7,26 +7,30 @@ import styled from "styled-components";
 function App() {
   const [todos, setTodos] = useState([
     {
-      id: 1,
+      id: 3,
       content: "Have some ice cream and jelly with Zeze",
       checked: true,
     },
     { id: 2, content: "Get a job", checked: false },
-    { id: 3, content: "Join gather town", checked: true },
+    { id: 1, content: "Join gather town", checked: true },
   ]);
 
   const newId = useRef(4);
 
-  const insertNewTodo = ({ content }) => {
+  const insertNewTodo = (content) => {
     const newTodo = { id: newId.current, content, checked: false };
+    // setTodos(todos.concat(newTodo));
+    setTodos([newTodo, ...todos]);
+    newId.current += 1;
   };
+  console.log(todos);
 
   return (
     <div className="App">
       <Header />
       <Template className="container">
         <H1>Todo List</H1>
-        <InputForm />
+        <InputForm onInsert={insertNewTodo} />
         <List todos={todos} />
       </Template>
     </div>

@@ -41,8 +41,8 @@ const Li = styled.li`
 `;
 
 const Checkbox = styled.span`
-  /* width: 30px; */
   border: 1px solid #dadada;
+  text-overflow: ellipsis;
 `;
 
 const Label = styled.label`
