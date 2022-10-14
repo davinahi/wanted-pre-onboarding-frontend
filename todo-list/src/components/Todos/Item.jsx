@@ -6,11 +6,11 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 
 const Item = ({ todo, onToggle, onRemove }) => {
   const [edited, setEdited] = useState(false);
+  const [val, setVal] = useState(todo.content);
+  const [confirmEdit, setConfirmEdit] = useState(false);
 
-  //함수명 변경(라벨에서도 쓰이고 있음)
   const checkBoxClickHandler = () => {
     onToggle(todo.id);
-    console.log("checkbox 움직인다!");
   };
 
   const removeHandler = () => {
@@ -19,6 +19,18 @@ const Item = ({ todo, onToggle, onRemove }) => {
 
   const editContentHandler = () => {
     setEdited(!edited);
+  };
+
+  const inputHandler = (e) => {
+    setVal(e.target.value);
+  };
+
+  const stopHandler = (e) => {
+    e.stopPropagation();
+  };
+
+  const confirmEditHandler = () => {
+    setConfirmEdit(!confirmEdit);
   };
 
   return (
@@ -33,8 +45,14 @@ const Item = ({ todo, onToggle, onRemove }) => {
             <i className="bi bi-square"></i>
           </span>
         )}
+
         {edited ? (
-          <input onChange={checkBoxClickHandler} value={todo.content}></input>
+          <input
+            className="edit-input"
+            onChange={inputHandler}
+            onClick={stopHandler}
+            value={val}
+          ></input>
         ) : (
           <Label forhtml="todoItem">{todo.content}</Label>
         )}
@@ -42,19 +60,25 @@ const Item = ({ todo, onToggle, onRemove }) => {
 
       {/* <input type="text" id="todoItem" /> */}
 
-      <div className="edit-btns">
-        <span
-          className="edit-btn"
-          role="button"
-          onClick={editContentHandler}
-          value={todo.content}
-        >
-          <i className="bi bi-pencil-square"></i>
-        </span>
-        <span className="remove-btn" role="button" onClick={removeHandler}>
-          <i className="bi bi-trash3"></i>
-        </span>
-      </div>
+      {edited ? (
+        <div className="edit-mode__btns">
+          <span className="confirm-btn" role="button">
+            <i className="bi bi-check-circle"></i>
+          </span>
+          <span className="cancel-btn" role="button">
+            <i className="bi bi-x-circle"></i>
+          </span>
+        </div>
+      ) : (
+        <div className="edit__btns">
+          <span className="edit-btn" role="button" onClick={editContentHandler}>
+            <i className="bi bi-pencil-square"></i>
+          </span>
+          <span className="remove-btn" role="button" onClick={removeHandler}>
+            <i className="bi bi-trash3"></i>
+          </span>
+        </div>
+      )}
     </Li>
   );
 };
@@ -67,9 +91,11 @@ const Li = styled.li`
   border-radius: 3px;
   align-items: center;
   margin-bottom: 5px;
-  .edit-btns {
+  .edit__btns,
+  .edit-mode__btns {
     margin-right: 3px;
-    .bi-pencil-square {
+    .bi-pencil-square,
+    .bi-check-circle {
       margin-right: 5px;
     }
   }
@@ -77,6 +103,14 @@ const Li = styled.li`
 
 const Checkbox = styled.span`
   border: 1px solid #dadada;
+  .edit-input {
+    border: none;
+    background-color: transparent;
+    outline: none;
+    height: 100%;
+    font-size: 16px;
+    margin-left: 10px;
+  }
 `;
 
 const Label = styled.label`
