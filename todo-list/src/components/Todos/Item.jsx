@@ -1,13 +1,14 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import "bootstrap-icons/font/bootstrap-icons.css";
 
 // <i class="bi bi-pencil-square"></i> 수정 아이콘
 
-const Item = ({ todo, onToggle, onRemove }) => {
+const Item = ({ todo, onToggle, onRemove, onCheck }) => {
   const [edited, setEdited] = useState(false);
   const [val, setVal] = useState(todo.content);
-  const inputEl = useRef();
+
+  const contentLen = onCheck(val) ? "20" : "35";
 
   const checkBoxClickHandler = () => {
     onToggle(todo.id);
@@ -23,7 +24,6 @@ const Item = ({ todo, onToggle, onRemove }) => {
 
   const inputHandler = (e) => {
     setVal(e.target.value);
-    inputEl.current.focus();
   };
 
   const stopHandler = (e) => {
@@ -62,6 +62,7 @@ const Item = ({ todo, onToggle, onRemove }) => {
               onChange={inputHandler}
               onClick={stopHandler}
               value={val}
+              maxLength={contentLen}
               // ref={inputEl}
             ></input>
           </Checkbox>
@@ -89,7 +90,8 @@ const Item = ({ todo, onToggle, onRemove }) => {
           <Checkbox onClick={checkBoxClickHandler}>
             {todo.checked ? (
               <span className="edit-btn" role="button">
-                <i className="bi bi-check-square"></i>
+                {/* <i className="bi bi-check-square"></i> */}
+                <i className="bi bi-check-square-fill"></i>
               </span>
             ) : (
               <span className="edit-btn" role="button">
@@ -138,6 +140,8 @@ const Li = styled.li`
 
 const Checkbox = styled.span`
   border: 1px solid #dadada;
+  width: 330px;
+  text-align: left;
   .edit-input {
     border: none;
     background-color: transparent;
@@ -145,6 +149,7 @@ const Checkbox = styled.span`
     height: 100%;
     font-size: 16px;
     margin-left: 10px;
+    width: 300px;
   }
 `;
 

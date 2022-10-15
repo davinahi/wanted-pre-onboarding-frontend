@@ -2,16 +2,16 @@ import { useState } from "react";
 import Button from "../UI/Button";
 import styled from "styled-components";
 
-const InputForm = ({ onInsert }) => {
+const InputForm = ({ onInsert, onCheck }) => {
   const [value, setValue] = useState("");
 
-  //자간에 따른 한글 영문 글자수 제한 길이 설정
-  const checkKor = (str) => {
-    const regExp = /[ㄱ-ㅎㅏ-ㅣ가-힣]/g;
-    if (regExp.test(str)) return true;
-    else return false;
-  };
-  const contentLen = checkKor(value) ? "20" : "35";
+  // //자간에 따른 한글 영문 글자수 제한 길이 설정
+  // const checkKor = (str) => {
+  //   const regExp = /[ㄱ-ㅎㅏ-ㅣ가-힣]/g;
+  //   if (regExp.test(str)) return true;
+  //   else return false;
+  // };
+  const contentLen = onCheck(value) ? "20" : "35";
 
   const inputChangeHandler = (e) => {
     setValue(e.target.value);

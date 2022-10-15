@@ -1,7 +1,7 @@
 import Item from "./Item";
 import styled from "styled-components";
 
-const List = ({ todos, onToggle, onRemove }) => {
+const List = ({ todos, onToggle, onRemove, onCheck }) => {
   return (
     <Ul>
       {todos.map((todo) => (
@@ -10,6 +10,7 @@ const List = ({ todos, onToggle, onRemove }) => {
           key={todo.id}
           onToggle={onToggle}
           onRemove={onRemove}
+          onCheck={onCheck}
         />
       ))}
     </Ul>
