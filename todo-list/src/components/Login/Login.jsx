@@ -7,7 +7,6 @@ const Login = () => {
   const [userId, setUserId] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  // const [user, setUser] = useState();
 
   const changeUserIdHandler = (e) => {
     setUserId(e.target.value);
@@ -24,6 +23,7 @@ const Login = () => {
       navigate("/todo");
     }
   };
+
   return (
     <div>
       <Container>

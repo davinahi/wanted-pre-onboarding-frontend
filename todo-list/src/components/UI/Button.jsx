@@ -7,9 +7,7 @@ import styled from "styled-components";
 const Button = (props) => {
   return (
     <div>
-      <Btn type="submit" {...props}>
-        Submit
-      </Btn>
+      <Btn type="submit" {...props}></Btn>
     </div>
   );
 };

@@ -26,7 +26,7 @@ const InputForm = ({ onInsert, onCheck }) => {
         onChange={inputChangeHandler}
         maxLength={contentLen}
       />
-      <Button />
+      <Button>Submit</Button>
     </Form>
   );
 };

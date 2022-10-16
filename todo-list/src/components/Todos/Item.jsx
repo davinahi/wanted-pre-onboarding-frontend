@@ -6,9 +6,11 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 
 const Item = ({ todo, onToggle, onRemove, onCheck }) => {
   const [edited, setEdited] = useState(false);
-  const [val, setVal] = useState(todo.content);
+  //첫 셋팅에 currunt값과 prev 값 둘 다 todo의 content값을 넣어주고 시작한다.
+  const [currentVal, setCurrentVal] = useState(todo.content);
+  const [prevVal, setPrevVal] = useState(todo.content);
 
-  const contentLen = onCheck(val) ? "20" : "35";
+  const contentLen = onCheck(currentVal) ? "20" : "35";
 
   const checkBoxClickHandler = () => {
     onToggle(todo.id);
@@ -22,25 +24,24 @@ const Item = ({ todo, onToggle, onRemove, onCheck }) => {
     setEdited(!edited);
   };
 
+  //여기서 currentVal과 prevValue의 저장값이 차이가 나기 시작
   const inputHandler = (e) => {
-    setVal(e.target.value);
+    setCurrentVal(e.target.value);
   };
 
   const stopHandler = (e) => {
     e.stopPropagation();
   };
 
+  //28번째줄 inputHandler에서 currentVal을 이미 업뎃 시켰기 때문에 "수정확인 버튼""을 눌렀을 때 prevVal을 업뎃시켜주면 된다.
   const ConfirmClickHandler = () => {
-    setVal(val);
     setEdited(!edited);
-    // 변경된 값을 label에 넘겨줘야함.
+    setPrevVal(currentVal);
   };
 
   const cancelClickHandler = () => {
     setEdited(false);
   };
-
-  console.log(val);
 
   return (
     <>
@@ -61,7 +62,7 @@ const Item = ({ todo, onToggle, onRemove, onCheck }) => {
               className="edit-input"
               onChange={inputHandler}
               onClick={stopHandler}
-              value={val}
+              value={currentVal}
               maxLength={contentLen}
               // ref={inputEl}
             ></input>
@@ -99,7 +100,8 @@ const Item = ({ todo, onToggle, onRemove, onCheck }) => {
               </span>
             )}
 
-            <Label forhtml="todoItem">{val}</Label>
+            {/* <Label forhtml="todoItem">{val}</Label> */}
+            <Label forhtml="todoItem">{prevVal}</Label>
           </Checkbox>
 
           <div className="edit__btns">
